@@ -1,0 +1,636 @@
+ROW MAJOR:
+#include <iostream>
+using namespace std;
+
+int main()
+{       int r,c,i,j,count,arr[50][50];
+        count=0;
+        int oned[50];
+        int k=0;
+
+        cout<<"Enter r: "<<endl;
+        cin>>r;
+        cout<<"Enter c: "<<endl;
+        cin>>c;
+
+        //input the matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       cout<<"Enter element arr["<<i<<"]["<<j<<"] of matrix: "<<endl;
+                        cin>>arr[i][j];
+
+                }
+
+        }
+        cout<<"The Matrix is:\n\n";
+        //print the 2d matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {
+                        cout<<arr[i][j]<<"\t";
+
+                }
+                cout<<"\n";
+        }
+        cout<<"The following Matrix can be mapped to a 1D array as follows: \n\n";
+        //Map 2d array to 1d array
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       if(arr[i][j]!=0){
+
+                                oned[k]=arr[i][j];
+                                k++;
+
+                        }
+                }
+
+        }
+        //Display 2d array
+        for(i=0;i<k;i++)
+                cout<<oned[i]<<"\t";
+        int m,n,location;
+        cout<<"\nEnter the rowno and colno of the element you want to retrive: " ;
+        cin>>m>>n;
+        location=(m*c)+n;
+        cout<<"\nThe element "<<arr[m][n]<<" is present in location "<<location<<endl;
+
+}
+
+
+cOLUMN MAJOR:
+
+#include <iostream>
+using namespace std;
+
+int main()
+{       int r,c,i,j,count;
+        count=0;
+        int oned[50];
+        int k=0;
+
+        cout<<"Enter r: "<<endl;
+        cin>>r;
+        cout<<"Enter c: "<<endl;
+        cin>>c;
+        int arr[r][c];
+
+        //input the matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       cout<<"Enter element arr["<<i<<"]["<<j<<"] of matrix: "<<endl;
+                        cin>>arr[i][j];
+
+                }
+
+        }
+        cout<<"The Matrix is:\n\n";
+        //print the 2d matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {
+                        cout<<arr[j][i]<<"\t";
+
+                }
+                cout<<"\n";
+        }
+        cout<<"The following Matrix can be mapped to a 1D array as follows: \n\n";
+        //Map 2d array to 1d array
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       if(arr[i][j]!=0){
+
+                                oned[k]=arr[i][j];
+                                k++;
+
+                        }
+                }
+
+        }
+        //Display 2d array
+        for(i=0;i<k;i++)
+                cout<<oned[i]<<"\t";
+        int m,n,location;
+        cout<<"\nEnter the rowno and colno of the element you want to retrive: " ;
+        cin>>m>>n;
+        location=(m*r)+n;
+        cout<<"\nThe element "<<arr[m][n]<<" is present in location "<<location<<endl;
+
+
+
+
+
+
+}
+
+Diagonal matrix
+
+//diagonal matrix
+#include <iostream>
+using namespace std;
+
+int main()
+{       int r,c,i,j,count;
+        count=0;
+        int oned[50];
+        int k=0;
+
+
+        cout<<"Enter r: "<<endl;
+        cin>>r;
+        cout<<"Enter c: "<<endl;
+        cin>>c;
+        int arr[r][c];
+
+        //input the matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       if(i==j){
+                                cout<<"Enter element arr["<<i<<"]["<<j<<"] of matrix: "<<endl;
+                                cin>>arr[i][j];
+                        }
+                        else
+                                arr[i][j]=0;
+
+                }
+
+        }
+        cout<<"The Matrix is:\n\n";
+
+        //print the 2d matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {
+                        cout<<arr[i][j]<<"\t";
+
+                }
+                cout<<"\n";
+        }
+        cout<<"The following Matrix can be mapped to a 1D array as follows: \n\n";
+        //Map 2d array to 1d array
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       if(arr[i][j]!=0){
+
+                                oned[k]=arr[i][j];
+                                k++;
+
+                        }
+                }
+
+        }
+        //Display 2d array
+        for(i=0;i<k;i++)
+                cout<<oned[i]<<"\t";
+        int m,n,index;
+
+        //Retrieving the elements
+        cout<<"\nEnter the rowno and colno of the element you want to retrive: " ;
+        cin>>m>>n;
+        index=m;
+        cout<<"\nThe element "<<arr[m][n]<<" is present in location "<<index<<endl;
+
+
+
+
+
+
+}
+
+
+Tridiagonal matrix
+
+
+
+//diagonal matrix
+#include <iostream>
+using namespace std;
+
+int main()
+{       int r,c,i,j,count;
+        count=0;
+        int oned[50];
+        int k=0;
+
+
+        cout<<"Enter r: "<<endl;
+        cin>>r;
+        cout<<"Enter c: "<<endl;
+        cin>>c;
+        int arr[r][c];
+
+        //input the matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       if(i==j){
+                                cout<<"Enter element arr["<<i<<"]["<<j<<"] of matrix: "<<endl;
+                                cin>>arr[i][j];
+                        }
+                        else
+                                arr[i][j]=0;
+
+                }
+
+        }
+        cout<<"The Matrix is:\n\n";
+
+        //print the 2d matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {
+                        cout<<arr[i][j]<<"\t";
+
+                }
+                cout<<"\n";
+        }
+        cout<<"The following Matrix can be mapped to a 1D array as follows: \n\n";
+        //Map 2d array to 1d array
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       if(arr[i][j]!=0){
+
+                                oned[k]=arr[i][j];
+                                k++;
+
+                        }
+                }
+
+        }
+        //Display 2d array
+        for(i=0;i<k;i++)
+                cout<<oned[i]<<"\t";
+        int m,n,index;
+
+        //Retrieving the elements
+        cout<<"\nEnter the rowno and colno of the element you want to retrive: " ;
+        cin>>m>>n;
+        index=m;
+        cout<<"\nThe element "<<arr[m][n]<<" is present in location "<<index<<endl;
+
+
+
+
+
+
+}
+
+//tridiagonal
+
+//tri-diagonal matrix
+
+#include <iostream>
+using namespace std;
+
+int main()
+{       int r,c,i,j,count;
+        count=0;
+        int oned[50];
+        int k=0;
+
+
+        cout<<"Enter order of the tridiagonal matrix: "<<endl;
+        cin>>r;
+
+
+
+        int arr[r][r];
+
+        //input the matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<r;j++)
+                {       if (abs(i-j)<=1){
+                                cout<<"Enter element arr["<<i<<"]["<<j<<"] of matrix: "<<endl;
+                                cin>>arr[i][j];
+                        }
+                        else
+                                arr[i][j]=0;
+
+                }
+
+        }
+        cout<<"The Matrix is:\n\n";
+
+        //print the 2d matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<r;j++)
+                {
+                        cout<<arr[i][j]<<"\t";
+
+                }
+                cout<<"\n";
+        }
+        cout<<"\n\n";
+
+        cout<<"The following Matrix can be mapped to a 1D array as follows: \n\n";
+        //Map 2d array to 1d array
+        for(i=0;i<r;i++)
+        {       for(j=0;j<r;j++)
+                {       if(arr[i][j]!=0){
+
+                                oned[k]=arr[i][j];
+                                k++;
+
+                        }
+                }
+
+        }
+        //Display 1d array
+        for(i=0;i<k;i++)
+                cout<<oned[i]<<"\t";
+
+        int m,n,index;
+
+        cout<<"\n\n";
+        //Retrieving the elements
+        cout<<"\nEnter the rowno and colno of the element you want to retrive: " ;
+        cin>>m>>n;
+        index = 2*m+n ;
+        cout<<"\nThe element "<<arr[m][n]<<" is present in location "<<index<<endl;
+
+        return 0;
+
+
+
+
+}
+
+
+//upper triangle
+
+//upper triangular matrix
+
+#include <iostream>
+using namespace std;
+
+int main()
+{       int r,i,j,count;
+        count=0;
+        int oned[50];
+        int k=0;
+
+
+        cout<<"Enter the order of the upper triangular square matrix: "<<endl;
+//upper triangular matrix
+
+#include <iostream>
+using namespace std;
+
+int main()
+{       int r,i,j,count;
+        count=0;
+        int oned[50];
+        int k=0;
+
+
+        cout<<"Enter the order of the upper triangular square matrix: "<<endl;
+//upper triangular matrix
+
+#include <iostream>
+using namespace std;
+
+int main()
+{       int r,i,j,count;
+        count=0;
+        int oned[50];
+        int k=0;
+
+
+        cout<<"Enter the order of the upper triangular square matrix: "<<endl;
+        cin>>r;
+
+        int arr[r][r];
+
+        //input the matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<r;j++)
+                {       if (i<=j){
+                                cout<<"Enter element arr["<<i<<"]["<<j<<"] of matrix: "<<endl;
+                                cin>>arr[i][j];
+                        }
+                        else
+                                arr[i][j]=0;
+
+                }
+
+        }
+        cout<<"The Matrix is:\n\n";
+
+        //print the 2d matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<r;j++)
+                {
+                        cout<<arr[i][j]<<"\t";
+
+                }
+                cout<<"\n";
+        }
+        cout<<"\n\n";
+
+        cout<<"The following Matrix can be mapped to a 1D array as follows: \n\n";
+        //Map 2d array to 1d array
+        for(i=0;i<r;i++)
+        {       for(j=0;j<r;j++)
+                {       if(arr[i][j]!=0){
+
+                                oned[k]=arr[i][j];
+                                k++;
+
+                        }
+                }
+
+        }
+        //Display 1d array
+        for(i=0;i<k;i++)
+                cout<<oned[i]<<"\t";
+
+        int m,n,index;
+	cout<<"\n\n";
+        //Retrieving the elements
+        cout<<"\nEnter the rowno and colno of the element you want to retrive: " ;
+        cin>>m>>n;
+        index = ((r*m)+n-(m*(m+1)/2)) ;
+        cout<<"\nThe element "<<arr[m][n]<<" is present in location "<<index<<endl;
+
+        return 0;
+
+
+//loer triangualr matrix
+
+//lower triangular matrix
+
+#include <iostream>
+using namespace std;
+
+int main()
+{       int r,i,j,count;
+        count=0;
+        int oned[50];
+        int k=0;
+
+
+        cout<<"Enter the order of the upper triangular square matrix: "<<endl;
+        cin>>r;
+
+        int arr[r][r];
+
+        //input the matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<r;j++)
+                {       if (i>=j){
+                                cout<<"Enter element arr["<<i<<"]["<<j<<"] of matrix: "<<endl;
+                                cin>>arr[i][j];
+                        }
+                        else
+                                arr[i][j]=0;
+
+                }
+
+        }
+        cout<<"The Matrix is:\n\n";
+
+        //print the 2d matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<r;j++)
+                {
+                        cout<<arr[i][j]<<"\t";
+
+                }
+                cout<<"\n";
+        }
+        cout<<"\n\n";
+
+        cout<<"The following Matrix can be mapped to a 1D array as follows: \n\n";
+        //Map 2d array to 1d array
+        for(i=0;i<r;i++)
+        {       for(j=0;j<r;j++)
+                {       if(arr[i][j]!=0){
+
+                                oned[k]=arr[i][j];
+                                k++;
+
+                        }
+                }
+
+        }
+        //Display 1d array
+        for(i=0;i<k;i++)
+                cout<<oned[i]<<"\t";
+
+        int m,n,index;
+        cout<<"\n\n";
+        //Retrieving the elements
+        cout<<"\nEnter the rowno and colno of the element you want to retrive: " ;
+        cin>>m>>n;
+
+        index = (m*(m+1)/2+n) ;
+        cout<<"\nThe element "<<arr[m][n]<<" is present in location "<<index<<endl;
+
+        return 0;
+
+
+
+
+}
+
+
+
+//sparse
+
+//sparse matrix
+#include <iostream>
+using namespace std;
+struct sparse{
+        int row;
+        int col;
+        int value;
+};
+
+
+int main()
+{       int r,c,i,j,count;
+        count=0;
+        int k=1;
+
+
+        cout<<"Enter r: "<<endl;
+        cin>>r;
+        cout<<"Enter c: "<<endl;
+        cin>>c;
+        int arr[r][c];
+
+        //input the matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       cout<<"Enter element arr["<<i<<"]["<<j<<"] of matrix: "<<endl;
+                        cin>>arr[i][j];
+                        if(arr[i][j]!=0)
+                                count++;
+
+                }
+
+        }
+        cout<<"The Matrix is:\n\n";
+
+        //print the 2d matrix
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {
+                        cout<<arr[i][j]<<"\t";
+
+                }
+                cout<<"\n";
+        }
+        cout<<"\n";
+
+        //making the sparse matrix
+        struct sparse s[count+1];
+        s[0].row=r;
+        s[0].col=c;
+        s[0].value=count;
+
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       if(arr[i][j]!=0){
+                                s[k].row=i;
+                                s[k].col=j;
+                                s[k].value=arr[i][j];
+                                k++;
+
+                        }
+                }
+
+        }
+        //Displaying sparse matrix
+        cout<<"Sparse Matrix is: \n";
+        for(i=0;i<(count+1);i++){
+                cout<<s[i].row<<" ";
+                cout<<s[i].col<<" ";
+                cout<<s[i].value<<" ";
+                cout<<"\n";
+        }
+
+        //Reconstructing matrix using Sparse matrix
+        int reconstruct[r][c];
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                {       reconstruct[i][j]=0;
+                }
+        }
+        for(i=1;i<(count+1);i++){
+                reconstruct[s[i].row][s[i].col]=s[i].value;
+        }
+        //Displaying the reconstructed matrix
+
+        cout<<"\n";
+        for(i=0;i<r;i++)
+        {       for(j=0;j<c;j++)
+                        cout<<reconstruct[i][j]<<"\t";
+                cout<<"\n";
+        }
+
+
+
+
+
+
+}
+

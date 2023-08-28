@@ -1,0 +1,105 @@
+question1
+
+#include <iostream>
+using namespace std;
+
+class EMPLOYEE
+{
+        int emp_num;
+        char emp_name[30];
+        float basic, da,it, net,gross;
+public:
+        void read_details(int i)
+        { cout<<"Enter employee number:\n ";
+          cin>>emp_num;
+          cout<<"Enter emp name:\n ";
+          cin>>emp_name;
+          cout<<"Enter basic sal:\n ";
+          cin>>basic;
+
+        }
+
+        void find_net_gross()
+        {
+                da=basic*0.12;
+                gross=basic+da;
+                it=gross*0.18;
+                net=gross-it;
+        }
+        void display_emp_details(int i)
+        {
+                cout<<"\nEmp number: "<<emp_num;
+                cout<<"\nname: "<<emp_name;
+                cout<<"\nnet salary is: "<<net;
+                cout<<"\nGross salary is: "<<gross;
+        }
+};
+int main()
+{
+        int n,i;
+        cout<<"\nEnter number of employees: ";
+        cin>>n;
+        EMPLOYEE emp[n];
+
+        for(i=0;i<n;i++)
+                emp[i].read_details(i+1);
+
+
+        for(i=0;i<n;i++)
+                emp[i].find_net_gross();
+
+
+        for(i=0;i<n;i++)
+        {       emp[i].display_emp_details(i+1);
+                cout<<"\n\n";
+        }
+        return 0;
+
+}
+
+
+
+question2
+
+
+#include <iostream>
+using namespace std;
+class flight{
+        int flight_no;
+        char destination[20];
+        float distance;
+        float fuel=13.2;
+
+        void calculate_fuel(float dist)
+        {        if (dist<=1000)
+                        fuel+=500;
+                else if(dist>1000 && dist<=2000)
+                        fuel+=1000;
+                else
+                        fuel+=2200;
+        }
+        public:
+                void information_entry()
+                {       cout<<"\nEnter flight num: ";
+                        cin>>flight_no;
+                        cout<<"\nEnter destination: ";
+                        cin>>destination;
+                        cout<<"\nEnter distance: ";
+                        cin>>distance;
+                        calculate_fuel(distance);
+                }
+                void display_info(){
+                        cout<<"Flight no: "<<flight_no<<endl;
+
+                        cout<<"Destination: "<<destination<<endl;
+
+                        cout<<"Distance: "<<distance<<endl;
+                        cout<<"Fuel:  "<<fuel<<" litres\n"<<endl;
+                }
+};
+int main()
+{       flight f;
+        f.information_entry();
+        f.display_info();
+        return 0;
+}
