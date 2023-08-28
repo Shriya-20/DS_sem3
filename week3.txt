@@ -1,0 +1,312 @@
+-Add Polynomials-
+
+#include <iostream>
+using namespace std;
+
+
+
+int main(){
+        struct poly
+        {       int coeff,exp;
+        };
+
+        struct poly p1[10],p2[10],p3[20];
+        int n1,n2,n3,i,j;
+
+        cout<<"Enter number of terms in 1st and 2nd polynomial:  ";
+        cin>>n1>>n2;
+
+        p1[0].coeff=n1;
+        p2[0].coeff=n2;
+        p1[0].exp=p2[0].exp=0;
+
+        //Inputting the polynomials
+        cout<<"Enter the coeficient and exponent of 1st polynomial: \n";
+        for(i=1;i<=n1;i++)
+                cin>>p1[i].coeff>>p1[i].exp;
+        cout<<"Enter the coeficient and exponent of 2nd polynomial: \n";
+        for(i=1;i<=n2;i++)
+                cin>>p2[i].coeff>>p2[i].exp;
+        cout<<"\n\n";
+        //Displaying the polynomials
+#include <iostream>
+using namespace std;
+
+
+
+int main(){
+        struct poly
+        {       int coeff,exp;
+        };
+
+        struct poly p1[10],p2[10],p3[20];
+        int n1,n2,n3,i,j;
+
+        cout<<"Enter number of terms in 1st and 2nd polynomial:  ";
+        cin>>n1>>n2;
+
+        p1[0].coeff=n1;
+        p2[0].coeff=n2;
+        p1[0].exp=p2[0].exp=0;
+
+        //Inputting the polynomials
+        cout<<"Enter the coeficient and exponent of 1st polynomial: \n";
+        for(i=1;i<=n1;i++)
+                cin>>p1[i].coeff>>p1[i].exp;
+        cout<<"Enter the coeficient and exponent of 2nd polynomial: \n";
+        for(i=1;i<=n2;i++)
+                cin>>p2[i].coeff>>p2[i].exp;
+        cout<<"\n\n";
+        //Displaying the polynomials
+        cout<<"Polynomial 1: \n\n";
+        for(i=0;i<=n1;i++)
+                cout<<p1[i].coeff<<"  "<<p1[i].exp<<"\n";
+        cout<<"\n\n";
+
+        cout<<"Polynomial 2: \n\n";
+        for(i=0;i<=n2;i++)
+                cout<<p2[i].coeff<<"  "<<p2[i].exp<<"\n" ;
+        cout<<"\n\n";
+
+        i=1;j=1;n3=0;
+        while(i<=n1 && j<=n2)
+        {       if(p1[i].exp>p2[j].exp)
+                {       n3++;
+                        p3[n3].coeff=p1[i].coeff;
+                        p3[n3].exp=p1[i].exp;
+                        i++;
+                }
+                else if(p1[i].exp<p2[j].exp)
+                {       n3++;
+                        p3[n3].coeff=p2[j].coeff;
+                        p3[n3].exp=p2[j].exp;
+                        j++;
+                }
+                else
+                {       int sum=(p1[i].coeff + p2[j].coeff);
+                               if(sum!=0)
+                               {        n3++;
+                                        p3[n3].coeff=sum;
+                                        p3[n3].exp=p1[i].exp;
+                               }
+                                i++;
+                                j++;
+                }
+        }
+
+        while(i<=n1)
+        {       n3++;
+                p3[n3].coeff=p1[i].coeff;
+                p3[n3].exp=p1[i].exp;
+                i++;
+        }
+        while(j<=n2)
+        {
+                n3++;
+                p3[n3].coeff=p2[j].coeff;
+                p3[n3].exp=p2[j].exp;
+                j++;
+
+        }
+        p3[0].coeff=n3;
+        p3[0].exp=0;
+
+        cout<<"Sum of the 2 polynomials as an array of doublets:  \n";
+       for(i=0;i<=n3;i++)
+        cout<<" ("<<p3[i].coeff<<" , "<<p3[i].exp<<")\n ";
+
+       return 0;
+}
+
+
+
+
+// length of string
+
+
+#include <iostream>
+using namespace std;
+
+int main(){
+        char str[30];
+        int i,c;
+        c=0;
+        cout<<"Enter a string: ";
+        cin.get(str,30);
+        for(i=0;str[i]!='\0';i++)
+                c++;
+        cout<<"Length of the string  "<<str<<"  is  "<<c<<"\n";
+        return 0;
+}
+
+
+//Concatenation of strings
+
+
+#include <iostream>
+using namespace std;
+
+int main(){
+        char str1[30],str2[30];
+        int i=0,j=0;
+
+        cout<<"Enter first string: ";
+        cin>>str1;
+        cout<<"Enter second string: ";
+        cin>>str2;
+
+        while(str1[i]!=0)
+                i++;
+         //i stores the length of the first string
+        while(str2[j]!='\0')
+        {       str1[i]=str2[j];
+                j++;
+                i++;
+
+        }
+        str1[i]='\0';
+
+        cout<<"Concatenated string is:  "<<str1<<"\n\n";
+        return 0;
+}
+
+output:
+
+Enter first string: shriya
+Enter second string: bhat
+Concatenated string is:  shriyabhat
+
+
+//Comparing 2 strings
+
+#include <iostream>
+using namespace std;
+
+int main(){
+        char str1[30],str2[30];
+        int i=0;
+        int diff;
+
+        cout<<"Enter first string: ";
+        cin>>str1;
+        cout<<"Enter second string: ";
+        cin>>str2;
+        cout<<"\n";
+
+        for(i ; str1[i]==str2[i] && str2[i]!='\0' ; i++);
+        //i stores the index of the location where the string differs
+        diff=int(str1[i])-int(str2[i]);
+        cout<<diff<<"\n";
+        if(diff>0)
+                cout<<"string1 is greater than string2 \n\n";
+        else if(diff<0)
+                cout<<"string2 is greater than string1 \n\n";
+        else
+                cout<<"The strings are equal \n\n";
+
+        return 0;
+}
+
+
+output:
+Enter first string: there
+Enter second string: their
+
+9
+string1 is greater than string2
+
+
+//Inserting substring
+
+#include <iostream>
+using namespace std;
+
+int main(){
+        char str1[30],substr[30];
+        int i=0,j=0,pos=0;
+
+        cout<<"Enter string: ";
+        cin>>str1;
+        cout<<"Enter substring to be inserted: ";
+        cin>>substr;
+        cout<<"Enter the position where you want to enter your substring: ";
+        cin>>pos;
+        int len=0;
+        int sublen=0;
+
+        while(str1[len]!=0)
+                len++;
+        while(substr[sublen]!=0)
+                sublen++;
+         //len stores the length of the str1
+        for(int i=len-1; i>=pos; i--)
+               str1[i+sublen]=str1[i];
+        for(int i=0; i<sublen; i++)
+                str1[pos+i] = substr[i];
+        str1[len+sublen]='\0';
+
+        cout<<"New string is:  "<<str1<<"\n\n";
+        return 0;
+}
+
+output:
+Enter string: shriyabhat
+Enter substring to be inserted: 123
+Enter the position where you want to enter your substring: 6
+New string is:  shriya123bhat
+
+//Deleting substring
+
+#include <iostream>
+
+using namespace std;
+
+int main(){
+
+        char str[30],substr[30];
+        int i=0,j=0,pos=0,flag=0;
+
+        cout<<"Enter string: ";
+
+        fflush(stdin);
+        cin>>str;
+        cout<<"Enter substring to be deleted: ";
+        fflush(stdin);
+        cin>>substr;
+
+        int len=0;
+        int sublen=0;
+
+        for(int i=0;str[i]!='\0';i++)
+                len++;
+        for(int i=0;substr[i]!='\0';i++)
+                sublen++;
+
+         //len and sublen store the length of str
+
+
+        while (str[i]!='\0')
+        {       if(str[i]==substr[j])
+                {       flag=1;
+                        while(substr[j] != '\0')
+                        {       if(str[i+j]!=substr[j])
+                                {       flag=0;
+                                        break;
+                                }
+                                j++;
+                        }
+                        if(flag==1)
+                                pos=i;
+                }
+                i++;
+        }
+        //deleting from position i or pos
+        for(i=pos; i <= (len-sublen) ; i++)
+                str[i] = str[i+sublen];
+
+        cout<< "New string is:  "<< str <<"\n\n" ;
+
+        return 0;
+}
+
+
