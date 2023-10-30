@@ -1,0 +1,192 @@
+Q1.
+
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+int prec(char c) {
+    if (c == '^') {
+        return 3;
+    } else if (c == '/' || c == '*') {
+        return 2;
+    } else if (c == '-' || c == '+') {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
+string infixToPost(string s) {
+    stack<char> st;
+    string postfix;
+
+    for (int i = 0; i < s.length(); i++) {
+        if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')) {
+            postfix += s[i];
+        } else if (s[i] == '(') {
+            st.push(s[i]);
+        } else if (s[i] == ')') {
+            while (!st.empty() && st.top() != '(') {
+                postfix += st.top();
+                st.pop();
+            }
+            if (!st.empty()) {
+                st.pop();
+            }
+        } else {
+            while (!st.empty() && (prec(st.top()) >= prec(s[i])) ){
+                postfix += st.top();
+                st.pop();
+            }
+            st.push(s[i]);
+        }
+    }
+
+    while (!st.empty()) {
+        postfix += st.top();
+        st.pop();
+    }
+
+    return postfix;
+}
+string rever(string str) {
+    string reversed = "";
+    for (int i = str.length() - 1; i >= 0; i--) {
+        reversed += str[i];
+    }
+    return reversed;
+}
+string infixToPrefix(string infix) {
+    string reversedInfix = rever(infix);
+
+    for (char& c : reversedInfix) {
+        if (c == '(')
+            c = ')';
+        else if (c == ')')
+            c = '(';
+    }
+
+    string postfix = infixToPost(reversedInfix);
+    string prefix = rever(postfix);
+
+    return prefix;
+}
+
+int main() {
+    string infix;
+    cout << "Enter the infix expression: ";
+    cin >> infix;
+
+    string postfix = infixToPost(infix);
+    cout << "Postfix: " << postfix << endl;
+    string prefix = infixToPrefix(infix);
+    cout << "Prefix: " << prefix << endl;
+
+    return 0;
+}
+
+Q2
+
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+
+int evaluatePostfix(string postfix) {
+    stack<int> st;
+
+    for (char c : postfix) {
+        if (isdigit(c)) {
+            st.push(c - '0');
+        } else {
+            int operand2 = st.top();
+            st.pop();
+            int operand1 = st.top();
+            st.pop();
+
+            switch (c) {
+                case '+':
+                    st.push(operand1 + operand2);
+                    break;
+                case '-':
+                    st.push(operand1 - operand2);
+                    break;
+                case '*':
+                    st.push(operand1 * operand2);
+                    break;
+                case '/':
+                    st.push(operand1 / operand2);
+                    break;
+            }
+        }
+    }
+
+    return st.top();
+}
+
+int main() {
+    string postfix;
+    cout << "Enter the postfix expression: ";
+    cin >> postfix;
+
+    int result = evaluatePostfix(postfix);
+    cout << "Result: " << result << endl;
+
+    return 0;
+}
+
+
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+// Function to evaluate a prefix expression
+int evaluatePrefix(string prefix) {
+    stack<int> st;
+
+    for (int i = prefix.size() - 1; i >= 0; i--) {
+        char c = prefix[i];
+        if (isdigit(c)) {
+            st.push(c - '0');
+        } else {
+            int operand1 = st.top();
+            st.pop();
+            int operand2 = st.top();
+            st.pop();
+
+            switch (c) {
+                case '+':
+                    st.push(operand1 + operand2);
+                    break;
+                case '-':
+                    st.push(operand1 - operand2);
+                    break;
+                case '*':
+                    st.push(operand1 * operand2);
+                    break;
+                case '/':
+                    st.push(operand1 / operand2);
+                    break;
+            }
+        }
+    }
+
+    return st.top();
+}
+
+int main() {
+    string prefix;
+    cout << "Enter the prefix expression: ";
+    cin >> prefix;
+
+    int result = evaluatePrefix(prefix);
+    cout << "Result: " << result << endl;
+
+    return 0;
+}

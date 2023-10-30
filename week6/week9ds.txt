@@ -1,0 +1,400 @@
+Q1
+
+#include <iostream>
+
+using namespace std;
+
+struct Node {
+    int data;
+    Node* prev;
+    Node* next;
+};
+
+class DoublyLinkedList {
+private:
+    Node* head;
+    Node* tail;
+
+public:
+    DoublyLinkedList() {
+        head = nullptr;
+        tail = nullptr;
+    }
+
+    void insertRear(int data) {
+        Node* newNode = new Node;
+        newNode->data = data;
+        newNode->prev = tail;
+        newNode->next = nullptr;
+
+        if (tail) {
+            tail->next = newNode;
+        } else {
+            head = newNode;
+        }
+
+        tail = newNode;
+    }
+
+    void deleteRear() {
+        if (!tail) {
+            cout << "Empty." << endl;
+            return;
+        }
+
+        Node* temp = tail;
+        tail = tail->prev;
+
+        if (tail) {
+            tail->next = nullptr;
+        } else {
+            head = nullptr;
+        }
+
+        delete temp;
+    }
+
+    void insertPosition(int data, int position) {
+        Node* newNode = new Node;
+        newNode->data = data;
+
+        if (position <= 1 || !head) {
+            newNode->prev = nullptr;
+            newNode->next = head;
+
+            if (head) {
+                head->prev = newNode;
+            } else {
+                tail = newNode;
+            }
+
+            head = newNode;
+        } else {
+            Node* current = head;
+            int currentPosition = 1;
+
+            while (current && currentPosition < position - 1) {
+                current = current->next;
+                currentPosition++;
+            }
+
+            if (current) {
+                newNode->prev = current;
+                newNode->next = current->next;
+
+                if (current->next) {
+                    current->next->prev = newNode;
+                } else {
+                    tail = newNode;
+                }
+
+                current->next = newNode;
+            } else {
+                cout << "Invalid" << endl;
+            }
+        }
+    }
+
+    void deletePosition(int position) {
+        if (position <= 0 || !head) {
+            cout << "Invalid position. Nothing to delete." << endl;
+            return;
+        }
+
+        Node* current = head;
+        int currentPosition = 1;
+
+        while (current && currentPosition < position) {
+            current = current->next;
+            currentPosition++;
+        }
+
+        if (current) {
+            if (current->prev) {
+                current->prev->next = current->next;
+            } else {
+                head = current->next;
+            }
+
+            if (current->next) {
+                current->next->prev = current->prev;
+            } else {
+                tail = current->prev;
+            }
+
+            delete current;
+        } else {
+            cout << "Invalid position. " << endl;
+        }
+    }
+
+    void insertAfter(int data, int afterData) {
+        Node* newNode = new Node;
+        newNode->data = data;
+
+        Node* current = head;
+
+        while (current) {
+            if (current->data == afterData) {
+                newNode->prev = current;
+                newNode->next = current->next;
+
+                if (current->next) {
+                    current->next->prev = newNode;
+                } else {
+                    tail = newNode;
+                }
+
+                current->next = newNode;
+
+                return;
+            }
+
+            current = current->next;
+        }
+
+        cout << "Not found" << endl;
+        delete newNode;
+    }
+
+    void insertBefore(int data, int beforeData) {
+        Node* newNode = new Node;
+        newNode->data = data;
+
+        Node* current = head;
+
+        while (current) {
+            if (current->data == beforeData) {
+                newNode->prev = current->prev;
+                newNode->next = current;
+
+                if (current->prev) {
+                    current->prev->next = newNode;
+                } else {
+                    head = newNode;
+                }
+
+                current->prev = newNode;
+
+                return;
+            }
+
+            current = current->next;
+        }
+
+        cout << "Not found" << endl;
+        delete newNode;
+    }
+
+    void printList() {
+        Node* current = head;
+        cout << "Doubly Linked List: ";
+        while (current) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    DoublyLinkedList dll;
+    int choice, data, position, afterData, beforeData;
+
+    do {
+        cout << "Menu:" << endl;
+        cout << "1. Insert at the rear end of the list" << endl;
+        cout << "2. Delete an element from the rear end of the list" << endl;
+        cout << "3. Insert an element at a given position of the list" << endl;
+        cout << "4. Delete an element from a given position of the list" << endl;
+        cout << "5. Insert an element after another element" << endl;
+        cout << "6. Insert an element before another element" << endl;
+        cout << "7. Print the list" << endl;
+        cout << "8. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter the element to insert: ";
+                cin >> data;
+                dll.insertRear(data);
+                break;
+            case 2:
+                dll.deleteRear();
+                break;
+            case 3:
+                cout << "Enter the element to insert: ";
+                cin >> data;
+                cout << "Enter the position to insert: ";
+                cin >> position;
+                dll.insertPosition(data, position);
+                break;
+            case 4:
+                cout << "Enter the position to delete: ";
+                cin >> position;
+                dll.deletePosition(position);
+                break;
+            case 5:
+                cout << "Enter the element to insert: ";
+                cin >> data;
+                cout << "Enter the element to insert after: ";
+                cin >> afterData;
+                dll.insertAfter(data, afterData);
+                break;
+            case 6:
+                cout << "Enter the element to insert: ";
+                cin >> data;
+                cout << "Enter the element to insert before: ";
+                cin >> beforeData;
+                dll.insertBefore(data, beforeData);
+                break;
+            case 7:
+                dll.printList();
+                break;
+            case 8:
+                cout << "Exit" << endl;
+                break;
+            default:
+                cout << "Invalid choice" << endl;
+        }
+    } while (choice != 8);
+
+    return 0;
+}
+
+
+Q2
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int c; // Coefficient
+    int e; // Exponent
+    Node* prev;
+    Node* next;
+};
+
+class Polynomial {
+private:
+    Node* head;
+    Node* tail;
+
+public:
+    Polynomial() {
+        head = nullptr;
+        tail = nullptr;
+    }
+
+    // Function to insert a term into the polynomial
+    void insertTerm(int c, int e) {
+        Node* newNode = new Node;
+        newNode->c = c;
+        newNode->e = e;
+        newNode->prev = nullptr;
+        newNode->next = nullptr;
+
+        if (!head) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+    }
+
+    // Function to display the polynomial
+    void display() {
+        Node* current = head;
+        while (current) {
+            cout << current->c << "x^" << current->e;
+            if (current->next) {
+                cout << " + ";
+            }
+            current = current->next;
+        }
+        cout << endl;
+    }
+
+    // Function to add two polynomials
+    static Polynomial addPolynomials(Polynomial poly1, Polynomial poly2) {
+        Polynomial result;
+        Node* term1 = poly1.head;
+        Node* term2 = poly2.head;
+
+        while (term1 && term2) {
+            if (term1->e == term2->e) {
+                result.insertTerm(term1->c + term2->c, term1->e);
+                term1 = term1->next;
+                term2 = term2->next;
+            } else if (term1->e > term2->e) {
+                result.insertTerm(term1->c, term1->e);
+                term1 = term1->next;
+            } else {
+                result.insertTerm(term2->c, term2->e);
+                term2 = term2->next;
+            }
+        }
+
+        // Add any remaining terms
+        while (term1) {
+            result.insertTerm(term1->c, term1->e);
+            term1 = term1->next;
+        }
+
+        while (term2) {
+            result.insertTerm(term2->c, term2->e);
+            term2 = term2->next;
+        }
+
+        return result;
+    }
+};
+
+int main() {
+    Polynomial poly1, poly2, result;
+    int n;
+    cout<<"Enter number of terms: "<<endl;
+    cin>>n;
+    cout<<"Polynomial 1: "<<endl;
+    for(int i=0;i<n;i++){
+            int x,y;
+    cout<<"Enter coefficient: "<<endl;
+    cin>>x;
+    cout<<"Enter exponent: "<<endl;
+    cin>>y;
+    poly1.insertTerm(x,y);
+
+
+    }
+    cout<<"Polynomial 2: "<<endl;
+    for(int i=0;i<n;i++){
+            int x,y;
+    cout<<"Enter coefficient: "<<endl;
+    cin>>x;
+    cout<<"Enter exponent: "<<endl;
+    cin>>y;
+    poly2.insertTerm(x,y);
+
+
+    }
+
+
+
+
+
+    cout << "Polynomial 1: ";
+    poly1.display();
+
+    cout << "Polynomial 2: ";
+    poly2.display();
+
+    result = Polynomial::addPolynomials(poly1, poly2);
+
+    cout << "Resultant Polynomial: ";
+    result.display();
+
+    return 0;
+}

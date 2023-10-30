@@ -1,0 +1,303 @@
+Q1
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class BinaryTree {
+public:
+    Node* root;
+
+    BinaryTree() {
+        root = nullptr;
+    }
+
+    // Function to create a binary tree
+    void createTree() {
+        int rootValue;
+        cout << "Enter the value for the root node: ";
+        cin >> rootValue;
+        root = new Node(rootValue);
+        createTree(root);
+    }
+
+    // Recursive function to create the binary tree
+    void createTree(Node* currentNode) {
+        int leftValue, rightValue;
+        cout << "Enter the left child value of " << currentNode->data << " (or -1 for no left child): ";
+        cin >> leftValue;
+
+        if (leftValue != -1) {
+            currentNode->left = new Node(leftValue);
+            createTree(currentNode->left);
+        }
+
+        cout << "Enter the right child value of " << currentNode->data << " (or -1 for no right child): ";
+        cin >> rightValue;
+
+        if (rightValue != -1) {
+            currentNode->right = new Node(rightValue);
+            createTree(currentNode->right);
+        }
+    }
+
+    // Function for in-order traversal (recursive)
+    void inOrder(Node* node) {
+        if (node == nullptr) return;
+
+        inOrder(node->left);
+        cout << node->data << " ";
+        inOrder(node->right);
+    }
+
+    // Function for post-order traversal (recursive)
+    void postOrder(Node* node) {
+        if (node == nullptr) return;
+
+        postOrder(node->left);
+        postOrder(node->right);
+        cout << node->data << " ";
+    }
+
+    // Function for pre-order traversal (recursive)
+    void preOrder(Node* node) {
+        if (node == nullptr) return;
+
+        cout << node->data << " ";
+        preOrder(node->left);
+        preOrder(node->right);
+    }
+
+    // Function to count the number of leaf nodes in the binary tree
+    int countLeaves(Node* node) {
+        if (node == nullptr) return 0;
+        if (node->left == nullptr && node->right == nullptr) {
+            return 1;
+        }
+        return countLeaves(node->left) + countLeaves(node->right);
+    }
+};
+
+int main() {
+    BinaryTree tree;
+    tree.createTree();
+
+    cout << "In-order Traversal: ";
+    tree.inOrder(tree.root);
+    cout << endl;
+
+    cout << "Post-order Traversal: ";
+    tree.postOrder(tree.root);
+    cout << endl;
+
+    cout << "Pre-order Traversal: ";
+    tree.preOrder(tree.root);
+    cout << endl;
+
+    int leafCount = tree.countLeaves(tree.root);
+    cout << "Number of Leaf Nodes: " << leafCount << endl;
+
+    return 0;
+}
+
+
+Q2
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class BinaryTree {
+public:
+    Node* root;
+
+    BinaryTree() {
+        root = nullptr;
+    }
+
+
+    void createTree() {
+        int rootValue;
+        cout << "Enter the value for the root node: ";
+        cin >> rootValue;
+        root = new Node(rootValue);
+        createTree(root);
+    }
+
+    // Recursive function to create the binary tree
+    void createTree(Node* currentNode) {
+        int leftValue, rightValue;
+        cout << "Enter the left child value of " << currentNode->data << " (or -1 for no left child): ";
+        cin >> leftValue;
+
+        if (leftValue != -1) {
+            currentNode->left = new Node(leftValue);
+            createTree(currentNode->left);
+        }
+
+        cout << "Enter the right child value of " << currentNode->data << " (or -1 for no right child): ";
+        cin >> rightValue;
+
+        if (rightValue != -1) {
+            currentNode->right = new Node(rightValue);
+            createTree(currentNode->right);
+        }
+    }
+
+    // Function to find the parent of a given element
+    Node* findParent(Node* node, int target) {
+        if (node == nullptr) return nullptr;
+
+        if ((node->left && node->left->data == target) || (node->right && node->right->data == target)) {
+            return node;
+        }
+
+        Node* leftResult = findParent(node->left, target);
+        if (leftResult) return leftResult;
+
+        return findParent(node->right, target);
+    }
+
+    // Function to calculate the depth of the tree
+    int findDepth(Node* node) {
+        if (node == nullptr) return 0;
+
+        int leftDepth = findDepth(node->left);
+        int rightDepth = findDepth(node->right);
+
+        return max(leftDepth, rightDepth) + 1;
+    }
+
+    // Function to print ancestors of a given node
+    bool printAncestors(Node* node, int target) {
+        if (node == nullptr) return false;
+
+        if (node->data == target) return true;
+
+        if (printAncestors(node->left, target) || printAncestors(node->right, target)) {
+            cout << node->data << " ";
+            return true;
+        }
+
+        return false;
+    }
+};
+
+int main() {
+    BinaryTree tree;
+    tree.createTree();
+
+    int target;
+    cout << "Enter the target element: ";
+    cin >> target;
+
+    Node* parent = tree.findParent(tree.root, target);
+    if (parent)
+        cout << "Parent of " << target << " is " << parent->data << endl;
+    else
+        cout << target << " is the root or not found in the tree." << endl;
+
+    int depth = tree.findDepth(tree.root);
+    cout << "Depth of the tree: " << depth << endl;
+
+    cout << "Ancestors of " << target << ": ";
+    tree.printAncestors(tree.root, target);
+    cout << endl;
+
+    return 0;
+}
+
+
+Q3
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class BinarySearchTree {
+public:
+    Node* root;
+
+    BinarySearchTree() {
+        root = nullptr;
+    }
+
+    // Function to insert a new element into the BST
+    Node* insert(Node* node, int value) {
+        if (node == nullptr) {
+            return new Node(value);
+        }
+
+        if (value < node->data) {
+            node->left = insert(node->left, value);
+        } else if (value > node->data) {
+            node->right = insert(node->right, value);
+        }
+
+        return node;
+    }
+
+    // Function to search for an element in the BST
+    bool search(Node* node, int value) {
+        if (node == nullptr) {
+            return false;
+        }
+
+        if (node->data == value) {
+            return true;
+        }
+
+        if (value < node->data) {
+            return search(node->left, value);
+        } else {
+            return search(node->right, value);
+        }
+    }
+};
+
+int main() {
+    BinarySearchTree bst;
+    int numElements;
+    
+    cout << "Enter the number of elements to insert into the binary search tree: ";
+    cin >> numElements;
+
+    for (int i = 0; i < numElements; i++) {
+        int element;
+        cout << "Enter element " << (i + 1) << ": ";
+        cin >> element;
+        bst.root = bst.insert(bst.root, element);
+    }
+
+    int searchValue;
+    cout << "Enter the element to search for: ";
+    cin >> searchValue;
+
+    if (bst.search(bst.root, searchValue)) {
+        cout << searchValue << " is found in the binary search tree." << endl;
+    } else {
+        cout << searchValue << " is not found in the binary search tree." << endl;
+    }
+
+    return 0;
+}
